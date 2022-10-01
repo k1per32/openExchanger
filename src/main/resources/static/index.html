@@ -1,15 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="/scripts.js"></script>
     <title>Exchanger</title>
 </head>
+
 <body>
-<form action="#" th:action="/sendRates" method="post">
-    <select th:field="ratesName"></select>
-    <option value="${}"></option>
-    <input type="submit" value="Проверка">
-</form>
+
+<div style="text-align: center;">
+    <select id="codes_select" size="1"></select>
+    <button id="btn" onclick='loadResultGif()'>Проверка</button>
+    <div id="out"></div>
+</div>
+
+<script>
+    $(loadForSelect());
+</script>
 
 </body>
+
 </html>

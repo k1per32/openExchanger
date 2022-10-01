@@ -51,8 +51,12 @@ public class OpenExchangeRatesServiceImpl implements ExchangeRatesService {
 
     //получение и обновление курсов
     public void refreshRates() {
-        getExchangeRatesOnCurrentDates();
-        getExchangeRatesOnYesterday();
+        if (this.currentRates == null) {
+            this.currentRates = getExchangeRatesOnCurrentDates();
+        }
+        if (this.historicalRates == null) {
+            this.historicalRates = getExchangeRatesOnYesterday();
+        }
     }
 
     @Override
@@ -61,8 +65,15 @@ public class OpenExchangeRatesServiceImpl implements ExchangeRatesService {
     }
 
     //сравнение валют
-    public ExchangeRates compareCurrencies(){
-        return this.historicalRates = getExchangeRatesOnYesterday();
+    public String compareCurrencies(String currency) {
+        switch (this.currentRates.getRates().get(currency).compareTo(this.historicalRates.getRates().get(currency))) {
+            case 1:
+                return "rich";
+            case -1:
+                return "broke";
+            default:
+                return "";
+        }
 
     }
 }
