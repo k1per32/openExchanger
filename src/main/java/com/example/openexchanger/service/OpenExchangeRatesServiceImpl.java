@@ -3,28 +3,21 @@ package com.example.openexchanger.service;
 import com.example.openexchanger.client.FeignOpenExchangeRatesClient;
 import com.example.openexchanger.model.ExchangeRates;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.regex.Pattern;
 
 
 @Service
 @Getter
 @Setter
-public class OpenExchangeRatesServiceImpl implements ExchangeRatesService {
+public class OpenExchangeRatesServiceImpl {
     private ExchangeRates currentRates;
     private ExchangeRates historicalRates;
     @Value("${openexchangerates.app.id}")
@@ -59,7 +52,6 @@ public class OpenExchangeRatesServiceImpl implements ExchangeRatesService {
         }
     }
 
-    @Override
     public List<String> getCurrencies() {
         return getExchangeRatesOnCurrentDates().getRates().keySet().stream().toList();
     }

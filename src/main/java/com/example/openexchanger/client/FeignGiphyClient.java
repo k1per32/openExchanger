@@ -11,6 +11,6 @@ import java.util.Map;
 public interface FeignGiphyClient {
 
     @GetMapping("/random")
-    public ResponseEntity<Map> getRandomGiphy(@RequestParam("api_key") String api_key,
+    ResponseEntity<Map> getRandomGiphy(@RequestParam("api_key") String api_key,
                                               @RequestParam("tag") String tag);
 }
