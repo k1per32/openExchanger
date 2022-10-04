@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,9 @@ public class GiphyClientImpl {
     private FeignGiphyClient feignGiphyClient;
 
     public ResponseEntity<Map> getGif(String tag) {
-        return feignGiphyClient.getRandomGiphy(this.api_key, tag);
+        ResponseEntity<Map> response = new ResponseEntity<>(HttpStatus.OK);
+        response = feignGiphyClient.getRandomGiphy(this.api_key, tag);
+        response.getBody().put("compareResult", tag);
+        return response;
     }
 }
